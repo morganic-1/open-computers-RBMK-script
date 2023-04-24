@@ -33,7 +33,7 @@ local threshold = 9000
 while true do
         -- Get the current reactor temperature
 
-        local temp = boiler.getHeat()
+        local temp  = boiler.getHeat()
 
         -- Get the amount of feed water
 
@@ -63,17 +63,27 @@ while true do
             controlRod.setLevel(controlRod.getLevel() - 10)
 
         end
-    end
+
+        -- Calculate the average water level
+
+        local sum = 0
+        for _, level in ipairs(boiler) do
+            sum = #boiler
+        end
+        local waterAVE = sum / #boiler
+
+
+
     -- Set the cursor position and print
     term.setCursor(5, 5)
-    term.write("boiler temp:")
+    term.write("average boiler temp:")
     term.setCursor(20, 5)
     term.write(temp)
 
     term.setCursor(5, 15)
-    term.write("Feed Water:")
+    term.write("average # feed water:")
     term.setCursor(20, 15)
-    term.write(water)
+    term.write(waterAVE)
 
     -- Sleep for 1 second
 
