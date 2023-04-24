@@ -1,15 +1,26 @@
 .-- Load the required module
 local term = require("term")
+local gpu = require("gpu")
 local component = require("component")
 local sides = require("sides")
 local rs = component.redstone
-local fuelRod = component.rbmk_fuel_rod
-local boiler = component.rbmk_boiler
+local fuelRod = {}
+local boiler = {}
 local controlRods = {}
 
--- Get all the control rods in the reactor
+-- Get all the control rods connected to the computer
 for address, type in component.list("rbmk_control_rod") do
     table.insert(controlRods, component.proxy(address))
+end
+
+-- get all boilers connected to the computer
+for address, type in component.list("rbmk_boiler") do
+    table.insert(boiler, component.proxy(address))
+end
+
+-- get all fuel rods connected to the computer
+for address, type in component.list("rbmk_fuel_rod") do
+    table.insert(boiler, component.proxy(address))
 end
 
 -- Set the target temperature to 600 C
