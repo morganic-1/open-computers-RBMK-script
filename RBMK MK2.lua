@@ -1,26 +1,26 @@
-.-- Load the required module
+-- Load the required module
 local term = require("term")
-local gpu = require("gpu")
 local component = require("component")
 local sides = require("sides")
 local rs = component.redstone
-local fuelRod = {}
-local boiler = {}
+local fuelRods = {}
+local boilers = {}
+local boiler = component.rbmk_boiler
 local controlRods = {}
 
--- Get all the control rods connected to the computer
+-- Get all the control rods in the reactor
 for address, type in component.list("rbmk_control_rod") do
     table.insert(controlRods, component.proxy(address))
 end
 
--- get all boilers connected to the computer
+-- Get all the control rods in the reactor
 for address, type in component.list("rbmk_boiler") do
-    table.insert(boiler, component.proxy(address))
+    table.insert(boilers, component.proxy(address))
 end
 
--- get all fuel rods connected to the computer
+-- Get all the control rods in the reactor
 for address, type in component.list("rbmk_fuel_rod") do
-    table.insert(boiler, component.proxy(address))
+    table.insert(fuelRods, component.proxy(address))
 end
 
 -- Set the target temperature to 600 C
@@ -33,7 +33,7 @@ local threshold = 9000
 while true do
         -- Get the current reactor temperature
 
-        local temp  = boiler.getHeat()
+        local temp = boiler.getHeat()
 
         -- Get the amount of feed water
 
@@ -63,27 +63,17 @@ while true do
             controlRod.setLevel(controlRod.getLevel() - 10)
 
         end
-
-        -- Calculate the average water level
-
-        local sum = 0
-        for _, level in ipairs(boiler) do
-            sum = #boiler
-        end
-        local waterAVE = sum / #boiler
-
-
-
+    end
     -- Set the cursor position and print
     term.setCursor(5, 5)
-    term.write("average boiler temp:")
+    term.write("boiler temp:")
     term.setCursor(20, 5)
     term.write(temp)
 
     term.setCursor(5, 15)
-    term.write("average # feed water:")
+    term.write("Feed Water:")
     term.setCursor(20, 15)
-    term.write(waterAVE)
+    term.write(water)
 
     -- Sleep for 1 second
 
@@ -91,6 +81,6 @@ while true do
 
     -- Clear the screen
 
-    term.clear()
+    --term.clear()
     
 end
