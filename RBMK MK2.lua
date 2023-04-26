@@ -81,6 +81,8 @@ while true do
 
     -- Clear the screen
 
+    term.clear()
+    end 
     --term.clear()
     
 end
