@@ -22,12 +22,13 @@ while true do
     local waterSum = 0
     local waterMath = 1
     while waterMath < #boilers do
-        waterSum = boilers[i].getWater + waterSum
+        water = boilers[waterMath].getWater
+        waterSum = water + waterSum
         waterMath = waterMath + 1
     end
 
     -- Print the average water level to the console
-    print("Average water level:", average)
+    print("Average water level:", waterSum)
 
 
     os.sleep(1)
