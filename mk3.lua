@@ -19,13 +19,6 @@ local threshold = 9000
 while true do
 
     -- Calculate the average water level
-    local waterSum = 0
-    local waterMath = 1
-    while waterMath < #boilers do
-        water = boilers[waterMath].getWater
-        waterSum = water + waterSum
-        waterMath = waterMath + 1
-    end
 
     -- Print the average water level to the console
     print("Average water level:", waterSum)
