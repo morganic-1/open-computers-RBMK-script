@@ -45,7 +45,9 @@ while true do
     
     local boilersAveWater = 0
     local boilersAveHeat = 0
-
+    local fuelRodsAveTemp = 0
+    local controlRodsAveTemp = 0
+    
     -- Calculate the averages for all component groups
     
     for i = 1, #boilers do
@@ -53,10 +55,20 @@ while true do
         boilersAveHeat = boilersAveHeat + boilers[i].getHeat()
     end
 
+    for i = 1, #fuelRods do
+        fuelRodsAveTemp = fuelRodsAveTemp + fuelRods[i].getHeat()
+    end
+
+    for i = 1, #controlRods do
+        controlRodsAveTemp = controlRodsAveTemp + controlRods[i].getHeat()
+    end
+
     -- Get averages of all reactor values
 
     boilersAveWater = boilersAveWater / #boilers
     boilersAveHeat = boilersAveHeat / #boilers
+    fuelRodsAveTemp = fuelRodsAveTemp / #fuelRods
+    controlRodsAveTemp = controlRodsAveTemp / #controlRods
 
      -- Output a redstone signal if the temperature is above the threshold
     
@@ -95,34 +107,16 @@ term.write("average amount of feed Water:")
 term.setCursor(35, 5)
 term.write(boilersAveWater)
 
-term.setCursor(5, 10)
-term.write("average core temp:")
-term.setCursor(30, 10)
-term.write(coreAveHeat)
+term.setCursor(5, 3)
+term.write("average fuel rod temp:")
+term.setCursor(30, 3)
+term.write(fuelRodsAveTemp)
 
-term.setCursor(5, 15)
-term.write("average fuel rod column heat:")
-term.setCursor(35, 15)
-term.write(fuelAveHeat)
-
-term.setCursor(5, 20)
-term.write("average fuel depleation:")
-term.setCursor(30, 20)
-term.write(fuelAveDepleat)
-
-term.setCursor(5, 25)
-term.write("average control rod heat:")
-term.setCursor(35, 25)
-term.write(controlAveHeat)
-
-term.setCursor(5, 30)
-term.write("average control rod depth:")
-term.setCursor(35, 30)
-term.write(controlInsert)
-
-
+term.setCursor(5, 7)
+term.write("average control rod temp:")
+term.setCursor(35, 7)
+term.write(controlRodsAveTemp)
 
 os.sleep(0.5)
-
 
 end
