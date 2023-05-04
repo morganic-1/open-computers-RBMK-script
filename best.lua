@@ -45,11 +45,6 @@ while true do
     
     local boilersAveWater = 0
     local boilersAveHeat = 0
-    local coreAveHeat = 0
-    local fuelAveHeat = 0
-    local fuelAveDepleat = 0
-    local controlAveHeat = 0
-    local controlInsert = 0
 
     -- Calculate the averages for all component groups
     
@@ -58,27 +53,10 @@ while true do
         boilersAveHeat = boilersAveHeat + boilers[i].getHeat()
     end
 
-    for j = 1, #fuelRods do
-        fuelAveHeat = fuelAveHeat + fuelRods[j].getHeat()
-        fuelAveDepleat = fuelAveDepleat + fuelRods[j].getDepletion()
-        coreAveHeat = coreAveHeat + fuelRods[j].getCoreHeat()
-    end
-
-    for b = 1, #controlRods do
-        controlAveHeat = controlAveHeat + boilers[b].getWater()
-        controlInsert = controlInsert + boilers[b].getLevel()
-    end
-
-
     -- Get averages of all reactor values
 
     boilersAveWater = boilersAveWater / #boilers
     boilersAveHeat = boilersAveHeat / #boilers
-    fuelAveHeat = fuelAveHeat / #fuelRods
-    fuelAveDepleat = fuelAveDepleat / #fuelRods
-    coreAveHeat = coreAveHeat / #fuelRods
-    controlAveHeat = controlAveHeat / #controlRods
-    controlInsert = controlInsert / #controlRods
 
      -- Output a redstone signal if the temperature is above the threshold
     
@@ -87,7 +65,6 @@ while true do
     else
         rs.setOutput(sides.right, 15)
     end
-
 
     -- Adjust the insertion depth of all the control rods
 
