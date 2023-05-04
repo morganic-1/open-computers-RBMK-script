@@ -17,6 +17,7 @@ local threshold = 9000
 
 -- Main loop
 while true do
+    
     local boilersAveWater = 0
     local boilersAveHeat = 0
     -- Calculate the average water level and heat level
@@ -32,4 +33,6 @@ while true do
     print("Average heat level:", boilersAveHeat)
 
     os.sleep(1)
+
+    term.clear()
 end

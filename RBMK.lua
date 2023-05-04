@@ -64,12 +64,24 @@ while true do
     term.setCursor(20, 15)
     term.write(water)
 
-    -- Sleep for 1 second
-
     os.sleep(1)
 
     -- Clear the screen
+    local screen = component.screen
 
-    term.clear()
-    
+    -- Create a double buffer
+    local bufferWidth, bufferHeight = screen.getAspectRatio()
+    local buffer = screen.createBuffer(bufferWidth, bufferHeight)
+    -- Clear the buffer
+    buffer:clear()
+
+    -- Draw the new contents to the buffer
+    buffer:drawBox(1, 1, bufferWidth, bufferHeight, " ", 0xFFFFFF, 0xFFFFFF)
+
+    -- Swap the buffer with the screen
+    screen.setBuffer(buffer)
+    screen.update()
+
+    -- Sleep for a short while
+    os.sleep(0.05)
 end
